@@ -1,16 +1,32 @@
-# React + Vite
+# Extended Learning - Anthropic Design Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React application that transforms Claude from answer-giver to teacher through three explorable depth levels:
 
-Currently, two official plugins are available:
+- **🟢 PROCEDURE** - Clear, executable steps
+- **🟡 INTUITION** - Mental models and analogies  
+- **🟣 PRINCIPLE** - Universal patterns and wisdom
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- Clean, minimal slider interface
+- Real-time Claude API integration
+- Three distinct response depths
+- Dark theme matching Claude's aesthetic
+- Responsive design
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Built With
 
-## Expanding the ESLint configuration
+- React + Vite
+- Pure CSS (no UI framework dependencies)
+- Anthropic Claude API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Add your Anthropic API key to `.env`: `VITE_ANTHROPIC_API_KEY=your-key-here`
+4. Start development server: `npm run dev`
+
+## Deployment
+
+The app is configured for Vercel deployment with environment variables.
