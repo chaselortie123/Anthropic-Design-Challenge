@@ -5,20 +5,31 @@ import ResponseCard from './components/ResponseCard';
 import { fetchAllLevels } from './api/claude';
 
 export default function App() {
-  const [responses, setResponses] = useState({ do: null, get: null, know: null });
+  const [responses, setResponses] = useState({
+    'do-text': null, 'do-visual': null,
+    'get-text': null, 'get-visual': null,
+    'know-text': null, 'know-visual': null,
+  });
   const [sliderValue, setSliderValue] = useState(0);
+  const [mode, setMode] = useState('text');
   const [isExtendedLearning, setIsExtendedLearning] = useState(true);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const level = sliderValue < 0.33 ? 'do' : sliderValue < 0.66 ? 'get' : 'know';
+  const responseKey = `${level}-${mode}`;
 
   const handleSubmit = async (text) => {
     setHasSubmitted(true);
-    setResponses({ do: null, get: null, know: null });
+    setResponses({
+      'do-text': null, 'do-visual': null,
+      'get-text': null, 'get-visual': null,
+      'know-text': null, 'know-visual': null,
+    });
     setSliderValue(0);
     
-    fetchAllLevels(text, (lvl, content) => {
-      setResponses(prev => ({ ...prev, [lvl]: content }));
+    // Fire all 6 requests simultaneously for smart loading
+    fetchAllLevels(text, (responseKey, content) => {
+      setResponses(prev => ({ ...prev, [responseKey]: content }));
     });
   };
 
@@ -28,8 +39,9 @@ export default function App() {
         
         {/* Response */}
         <ResponseCard 
-          content={responses[level]} 
+          content={responses[responseKey]} 
           hasSubmitted={hasSubmitted}
+          mode={mode}
         />
 
         {/* Slider - show after first response */}
@@ -38,10 +50,12 @@ export default function App() {
             value={sliderValue} 
             onChange={setSliderValue}
             loadedLevels={{
-              do: !!responses.do,
-              get: !!responses.get,
-              know: !!responses.know,
+              do: !!responses[`do-${mode}`],
+              get: !!responses[`get-${mode}`],
+              know: !!responses[`know-${mode}`],
             }}
+            mode={mode}
+            setMode={setMode}
           />
         )}
 
@@ -50,7 +64,7 @@ export default function App() {
           onSubmit={handleSubmit}
           isExtendedLearning={isExtendedLearning}
           onToggleExtendedLearning={() => setIsExtendedLearning(!isExtendedLearning)}
-          disabled={!responses.do && hasSubmitted}
+          disabled={!responses[`do-${mode}`] && hasSubmitted}
         />
 
       </div>

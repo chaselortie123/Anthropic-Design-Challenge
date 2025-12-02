@@ -1,10 +1,16 @@
-export default function DepthSlider({ value, onChange, loadedLevels }) {
-  const level = value < 0.33 ? 0 : value < 0.66 ? 1 : 2;
+export default function DepthSlider({ value, onChange, loadedLevels, mode, setMode }) {
+  const snapPositions = [0, 0.5, 1];
+  const level = value <= 0.25 ? 0 : value <= 0.75 ? 1 : 2;
   const levelKey = ['do', 'get', 'know'][level];
   const labels = ['PROCEDURE', 'INTUITION', 'PRINCIPLE'];
   const colors = ['#22c55e', '#eab308', '#a855f7'];
   const colorClass = ['color-do', 'color-get', 'color-know'][level];
   const bgClass = ['bg-do', 'bg-get', 'bg-know'][level];
+
+  const handleChange = (e) => {
+    const newValue = parseFloat(e.target.value);
+    onChange(newValue);
+  };
 
   return (
     <div className="depth-slider-container">
@@ -40,6 +46,7 @@ export default function DepthSlider({ value, onChange, loadedLevels }) {
           style={{ width: `${value * 100}%` }}
         />
 
+
         {/* Position markers with loading state */}
         <div className="slider-markers">
           {['do', 'get', 'know'].map((lvl, i) => (
@@ -69,7 +76,7 @@ export default function DepthSlider({ value, onChange, loadedLevels }) {
           max="1"
           step="0.01"
           value={value}
-          onChange={(e) => onChange(parseFloat(e.target.value))}
+          onChange={handleChange}
           className="slider-input"
         />
       </div>
@@ -78,6 +85,24 @@ export default function DepthSlider({ value, onChange, loadedLevels }) {
       <div className="slider-labels">
         <span>How</span>
         <span>Why</span>
+      </div>
+
+      {/* Mode toggle at bottom */}
+      <div className="slider-mode-toggle">
+        <button
+          className={`slider-mode-button ${mode === 'text' ? 'active' : ''}`}
+          onClick={() => setMode('text')}
+          aria-label="Text mode"
+        >
+          📖
+        </button>
+        <button
+          className={`slider-mode-button ${mode === 'visual' ? 'active' : ''}`}
+          onClick={() => setMode('visual')}
+          aria-label="Visual mode"
+        >
+          👁️
+        </button>
       </div>
     </div>
   );

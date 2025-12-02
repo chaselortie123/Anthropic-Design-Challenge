@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,7 +6,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
   background-color: #171717;
   color: #f4f4f5;
   min-height: 100vh;
@@ -31,13 +32,15 @@ body {
   border-radius: 0.75rem;
   padding: 1.25rem;
   min-height: 200px;
+  max-height: 300px;
+  overflow-y: auto;
   font-size: 0.875rem;
   line-height: 1.625;
   white-space: pre-wrap;
 }
 
 .response-placeholder {
-  color: #52525b;
+  color: #71717a;
 }
 
 .response-loading {
@@ -46,6 +49,40 @@ body {
 
 .response-content {
   color: #f4f4f5;
+}
+
+.response-visual {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  white-space: pre;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  margin: 0 0 0.25rem 0;
+  color: #f4f4f5;
+}
+
+.markdown-content strong {
+  font-weight: 600;
+  color: #f4f4f5;
+}
+
+.markdown-content ul {
+  margin: 0.25rem 0;
+  padding-left: 1rem;
+}
+
+.markdown-content li {
+  margin: 0.125rem 0;
+  color: #f4f4f5;
+}
+
+.markdown-content p {
+  margin: 0.25rem 0;
+  line-height: 1.6;
 }
 
 .depth-slider-container {
@@ -101,6 +138,23 @@ body {
   height: 0.25rem;
   border-radius: 9999px;
   transition: all 100ms;
+}
+
+.slider-notches {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.slider-notch {
+  position: absolute;
+  width: 2px;
+  height: 0.75rem;
+  border-radius: 1px;
+  transition: all 150ms;
 }
 
 .slider-markers {
@@ -271,3 +325,36 @@ body {
 .bg-do { background-color: #22c55e; }
 .bg-get { background-color: #eab308; }
 .bg-know { background-color: #a855f7; }
+
+/* Slider Mode Toggle */
+.slider-mode-toggle {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+  gap: 0.25rem;
+}
+
+.slider-mode-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: none;
+  border-radius: 0.25rem;
+  background: transparent;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 150ms;
+  opacity: 0.6;
+}
+
+.slider-mode-button:hover {
+  opacity: 0.8;
+  background-color: rgba(255,255,255,0.05);
+}
+
+.slider-mode-button.active {
+  opacity: 1;
+  background-color: rgba(255,255,255,0.1);
+}
