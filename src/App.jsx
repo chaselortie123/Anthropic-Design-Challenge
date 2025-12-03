@@ -10,7 +10,7 @@ export default function App() {
     'get-text': null, 'get-visual': null,
     'know-text': null, 'know-visual': null,
   });
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0.1);
   const [mode, setMode] = useState('text');
   const [isExtendedLearning, setIsExtendedLearning] = useState(true);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -25,7 +25,7 @@ export default function App() {
       'get-text': null, 'get-visual': null,
       'know-text': null, 'know-visual': null,
     });
-    setSliderValue(0);
+    setSliderValue(0.1);
     
     // Fire all 6 requests simultaneously for smart loading
     fetchAllLevels(text, (responseKey, content) => {
@@ -42,22 +42,21 @@ export default function App() {
           content={responses[responseKey]} 
           hasSubmitted={hasSubmitted}
           mode={mode}
+          level={level}
         />
 
-        {/* Slider - show after first response */}
-        {hasSubmitted && (
-          <DepthSlider 
-            value={sliderValue} 
-            onChange={setSliderValue}
-            loadedLevels={{
-              do: !!responses[`do-${mode}`],
-              get: !!responses[`get-${mode}`],
-              know: !!responses[`know-${mode}`],
-            }}
-            mode={mode}
-            setMode={setMode}
-          />
-        )}
+        {/* Slider - always visible */}
+        <DepthSlider 
+          value={sliderValue} 
+          onChange={setSliderValue}
+          loadedLevels={{
+            do: !!responses[`do-${mode}`],
+            get: !!responses[`get-${mode}`],
+            know: !!responses[`know-${mode}`],
+          }}
+          mode={mode}
+          setMode={setMode}
+        />
 
         {/* Input */}
         <ChatInput 
