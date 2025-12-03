@@ -94,19 +94,12 @@ new ideas to what you know.`,
     const currentContent = textContent[level];
     
     return (
-      <div className="response-content markdown-content">
-        <div style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '600', color: levelColor }}>
-          {currentContent.title}
-        </div>
-        {currentContent.content.map((line, i) => (
-          <div key={i} style={{ marginBottom: line === '' ? '0.5rem' : '0.25rem' }}>
-            {line}
-          </div>
-        ))}
-        <div style={{ fontStyle: 'italic', opacity: '0.8', marginTop: '1rem' }}>
-          Try dragging the slider above or ask: "How do I learn faster?"
-        </div>
-      </div>
+      <div 
+        className="response-content markdown-content"
+        dangerouslySetInnerHTML={renderMarkdown(
+          `# ${currentContent.title}\n\n${currentContent.content.join('\n')}\n\n*Try dragging the slider above or ask: "How do I learn faster?"*`
+        )}
+      />
     );
   };
 
