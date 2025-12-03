@@ -47,7 +47,7 @@ new ideas to what you know.`,
       };
       
       return (
-        <div className="response-placeholder">
+        <div className="response-content">
           <div style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '600' }}>
             {levelEmoji} {levelName} Mode Demo
           </div>
@@ -94,7 +94,7 @@ new ideas to what you know.`,
     const currentContent = textContent[level];
     
     return (
-      <div className="response-placeholder">
+      <div className="response-content markdown-content">
         <div style={{ marginBottom: '1rem', fontSize: '1rem', fontWeight: '600', color: levelColor }}>
           {currentContent.title}
         </div>
